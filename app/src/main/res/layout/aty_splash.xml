@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    xmlns:svg="http://schemas.android.com/apk/res-auto">
+
+    <fred.angel.com.mgank.model.SvgView
+        android:id="@+id/svg"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        svg:phase="1.0"
+        svg:duration="2500"
+        svg:fadeFactor="10.0"
+        svg:strokeWidth="2.0"
+        svg:strokeColor="#ffffffff">
+
+    </fred.angel.com.mgank.model.SvgView>
+
+</FrameLayout>

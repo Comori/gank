@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">干货</string>
+
+    <string-array name="category_names">
+        <item>今日</item>
+        <item>Android</item>
+        <item>IOS</item>
+        <item>前端</item>
+        <item>瞎推荐</item>
+        <item>App</item>
+    </string-array>
+</resources>

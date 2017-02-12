@@ -1,0 +1,53 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@color/page_color</item>
+
+        <item name="android:actionBarSize">48dp</item>
+        <item name="actionBarSize">48dp</item>
+
+    </style>
+
+    <style name="AppTheme" parent="BaseAppTheme">
+    <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+</style>
+
+
+    <style name="AppTheme.AdsTheme">
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="activityAnimation" parent="@android:style/Animation.Translucent">
+        <item name="android:activityOpenExitAnimation">@anim/slide_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>
+        <item name="android:activityOpenEnterAnimation">@anim/slide_right_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
+    </style>
+
+    <style name="HomeTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabPaddingStart">10dp</item>
+        <item name="tabPaddingEnd">10dp</item>
+        <item name="tabTextAppearance">@style/tab_text_style</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMode">scrollable</item>
+    </style>
+
+    <style name="tab_text_style" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+</resources>

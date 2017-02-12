@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@id/frag_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        ></FrameLayout>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_button_height"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_white_rect"
+        >
+
+        <RadioButton
+            android:id="@+id/home_rb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/selector_home_tab"
+            android:gravity="center"
+            android:button="@null"
+            android:paddingTop="10dp"
+            android:background="@null"
+            android:checked="true"
+            />
+        <RadioButton
+            android:id="@+id/find_rb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/selector_find_tab"
+            android:gravity="center"
+            android:button="@null"
+            android:paddingTop="10dp"
+            android:background="@null"
+            />
+        <RadioButton
+            android:id="@+id/mine_rb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/selector_mine_tab"
+            android:gravity="center"
+            android:button="@null"
+            android:paddingTop="10dp"
+            android:background="@null"
+            />
+
+    </RadioGroup>
+</LinearLayout>

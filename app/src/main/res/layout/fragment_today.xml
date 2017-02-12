@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fred.angel.com.mgank.component.IRecyclerView
+            android:id="@id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </fred.angel.com.mgank.component.IRecyclerView>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</LinearLayout>

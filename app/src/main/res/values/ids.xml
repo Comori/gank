@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="i_toolbar" type="id"/>
+    <item name="recyclerview" type="id"/>
+    <item name="name_tv" type="id"/>
+    <item name="switchCompat" type="id"/>
+    <item name="swipeRefreshLayout" type="id"/>
+    <item name="frag_content" type="id" />
+
+    <item name="frag_vp_container" type="id"/>
+
+</resources>
