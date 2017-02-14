@@ -35,12 +35,12 @@
 
         <activity android:name=".view.MainActivity"/>
         <activity android:name=".view.ManagerCategoryActivity"/>
-        <activity android:name=".view.WebActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            >
 
-        </activity>
+        <activity
+            android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="sensor"
+            android:theme="@style/FinestWebViewTheme.Light"/>
     </application>
 
 </manifest>

@@ -1,18 +1,25 @@
 package fred.angel.com.mgank.view;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.CompoundButton;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Callable;
 
+import bolts.Task;
 import fred.angel.com.mgank.R;
 import fred.angel.com.mgank.adapter.CategoryAdapter;
 import fred.angel.com.mgank.component.BaseToolbarActivity;
+import fred.angel.com.mgank.component.Utils.Constant;
 import fred.angel.com.mgank.component.itemtouch.DefaultItemTouchHelpCallback;
 import fred.angel.com.mgank.component.itemtouch.DefaultItemTouchHelper;
 import fred.angel.com.mgank.component.widget.DividerItemDecoration;
@@ -32,6 +39,7 @@ public class ManagerCategoryActivity extends BaseToolbarActivity implements ICat
     private CategoryAdapter categoryAdapter;
 
     private List<Category> categories;
+    private boolean isChanged;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +82,28 @@ public class ManagerCategoryActivity extends BaseToolbarActivity implements ICat
     protected void onInitToolBar(IToolbar iToolbar) {
         super.onInitToolBar(iToolbar);
         iToolbar.setTitle("首页展示");
+        setToolbarBack(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isChanged){
+                    Intent intent = new Intent();
+                    intent.putExtra(Constant.IntentKey.CATEGORIES, (Serializable) categories);
+                    setResult(Activity.RESULT_OK,intent);
+                    saveCategories();
+                }
+                finish();
+            }
+        });
+    }
+
+    private void saveCategories() {
+        Task.callInBackground(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                categoryPresenter.saveCategories(categories);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -97,6 +127,7 @@ public class ManagerCategoryActivity extends BaseToolbarActivity implements ICat
         }
         @Override
         public boolean onMove(int srcPosition, int targetPosition) {
+            isChanged = true;
             if (categories != null) {
                 // 更换数据源中的数据Item的位置
                 Collections.swap(categories, srcPosition, targetPosition);
@@ -112,6 +143,7 @@ public class ManagerCategoryActivity extends BaseToolbarActivity implements ICat
     private CategoryAdapter.OnCheckedChangeListener onCheckedChangeListener = new CategoryAdapter.OnCheckedChangeListener() {
         @Override
         public void onItemCheckedChange(CompoundButton view, int position, boolean checked) {
+            isChanged = true;
             categories.get(position).setChecked(checked);
         }
     };

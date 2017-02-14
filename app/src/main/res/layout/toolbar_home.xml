@@ -30,7 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_toLeftOf="@id/more_category_ic"
-            app:tab_texts="@array/category_names"
             style="@style/HomeTabLayout"
             android:paddingBottom="0.5dp"
             android:layout_alignParentTop="true"

@@ -17,7 +17,9 @@ import fred.angel.com.mgank.R;
 import fred.angel.com.mgank.adapter.TodayGankAdapter;
 import fred.angel.com.mgank.component.BaseFragment;
 import fred.angel.com.mgank.component.IRecyclerView;
+import fred.angel.com.mgank.component.Utils.Constant;
 import fred.angel.com.mgank.component.Utils.DisplayUtil;
+import fred.angel.com.mgank.component.cache.LocalDataFactory;
 import fred.angel.com.mgank.component.stickyrecyclerview.StickyRecyclerHeadersDecoration;
 import fred.angel.com.mgank.model.enity.DateGank;
 import fred.angel.com.mgank.presenter.TodayGankPresenter;
@@ -64,7 +66,7 @@ public class TodayFragment extends BaseFragment implements ITodayGankView{
         recyclerView.addItemDecoration(headersDecoration);
 
         final int pad_10 = DisplayUtil.dip2px(10);
-        final int pad_1 = DisplayUtil.dip2px(1f);
+        final int pad_1 = DisplayUtil.dip2px(0.5f);
 
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
@@ -107,6 +109,14 @@ public class TodayFragment extends BaseFragment implements ITodayGankView{
 
     @Override
     public void showTodayGank(DateGank gank) {
+        LocalDataFactory.getManager(LocalDataFactory.LocalDataType.SP)
+                .put(Constant.LocalCacheKey.SP_INIT_DATE,true);
+        LocalDataFactory.getManager(LocalDataFactory.LocalDataType.SP)
+                .put(Constant.LocalCacheKey.SP_YEAR,calendar.get(Calendar.YEAR));
+        LocalDataFactory.getManager(LocalDataFactory.LocalDataType.SP)
+                .put(Constant.LocalCacheKey.SP_MONTH,calendar.get(Calendar.MONTH));
+        LocalDataFactory.getManager(LocalDataFactory.LocalDataType.SP)
+                .put(Constant.LocalCacheKey.SP_DAY,calendar.get(Calendar.DAY_OF_MONTH));
 
         todayGankAdapter.setData(gank);
     }
@@ -118,7 +128,18 @@ public class TodayFragment extends BaseFragment implements ITodayGankView{
 
     @Override
     public void showEmpty() {
-        calendar.add(Calendar.DAY_OF_MONTH,-1);
+        if(LocalDataFactory.<Boolean>getManager(LocalDataFactory.LocalDataType.SP)
+                .find(Constant.LocalCacheKey.SP_INIT_DATE)){
+            calendar.set(Calendar.YEAR,LocalDataFactory.<Integer>getManager(LocalDataFactory.LocalDataType.SP)
+                    .find(Constant.LocalCacheKey.SP_YEAR));
+            calendar.set(Calendar.MONTH,LocalDataFactory.<Integer>getManager(LocalDataFactory.LocalDataType.SP)
+                    .find(Constant.LocalCacheKey.SP_MONTH));
+            calendar.set(Calendar.DAY_OF_MONTH,LocalDataFactory.<Integer>getManager(LocalDataFactory.LocalDataType.SP)
+                    .find(Constant.LocalCacheKey.SP_DAY));
+        }else {
+            calendar.add(Calendar.DAY_OF_MONTH,-1);
+        }
+
         todayGankPresenter.loadTodayGank(calendar.get(Calendar.YEAR)+"",
                 (calendar.get(Calendar.MONTH)+1)+"",
                 calendar.get(Calendar.DAY_OF_MONTH)+"");

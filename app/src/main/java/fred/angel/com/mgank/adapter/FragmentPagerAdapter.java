@@ -52,4 +52,9 @@ public class FragmentPagerAdapter extends android.support.v4.app.FragmentPagerAd
 			super.destroyItem(container, position, object);
 		}
 	}
+
+	public void setFragments(List<BaseFragment> fragments){
+		this.fragments = fragments;
+		notifyDataSetChanged();
+	}
 }

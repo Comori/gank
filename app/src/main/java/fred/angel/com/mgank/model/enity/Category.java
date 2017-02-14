@@ -5,7 +5,7 @@ package fred.angel.com.mgank.model.enity;
  * Todo
  */
 
-public class Category extends BaseModel {
+public class Category extends BaseModel  {
 
     private String name;
 

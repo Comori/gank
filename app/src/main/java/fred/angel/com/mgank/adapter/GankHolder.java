@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import fred.angel.com.mgank.R;
-import fred.angel.com.mgank.component.FrescoImgView;
 import fred.angel.com.mgank.component.Utils.Utils;
 
 /**
@@ -16,7 +15,7 @@ import fred.angel.com.mgank.component.Utils.Utils;
  */
 public class GankHolder extends RecyclerView.ViewHolder{
 
-    FrescoImgView img;
+    ImageView img;
     TextView contentTv,authorTv,timeTv;
     ImageView tagImg;
 

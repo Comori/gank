@@ -140,9 +140,9 @@ public class DateGank extends BaseModel {
     }
 
     public Gank getItem(int position){
-        int count = getRecommendGankSize();
+        int count = getWelfareGankSize();
         if(position >=0 && position < count){
-            return recommendGanks.get(position);
+            return welfareGanks.get(position);
         }
 
         if(position >= count && position < (count+getAndroidGankSize())){
@@ -170,11 +170,11 @@ public class DateGank extends BaseModel {
         }
 
         count += getExpandGankSize();
-        if(position >= count && position < (count+getWelfareGankSize())){
-            return welfareGanks.get(position-count);
+        if(position >= count && position < (count+getRecommendGankSize())){
+            return recommendGanks.get(position-count);
         }
 
-        count += getWelfareGankSize();
+        count += getRecommendGankSize();
         if(position >= count && position < (count+getRestGankSize())){
             return restGanks.get(position-count);
         }

@@ -12,6 +12,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import fred.angel.com.mgank.IApplication;
 import fred.angel.com.mgank.R;
@@ -158,5 +162,33 @@ public class Utils {
                 return R.drawable.ic_widgets;
         }
         return 1;
+    }
+
+    /**
+     * 格式化时间
+     * @return
+     */
+    public static String parseDate(String dateStr){
+        SimpleDateFormat srcFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        Date srcDate = null;
+        try {
+            srcDate = srcFormat.parse(dateStr);
+            Calendar now = Calendar.getInstance();
+            int ny = now.get(Calendar.YEAR);
+            Calendar old = Calendar.getInstance();
+            old.setTimeInMillis(srcDate.getTime());
+            int oy = old.get(Calendar.YEAR);
+            Date date = old.getTime();
+            if(ny == oy){//今年只显示月日
+                SimpleDateFormat mdFormat = new SimpleDateFormat("MM-dd HH:mm");
+                return mdFormat.format(date);
+            }else{
+                SimpleDateFormat ymdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                return ymdFormat.format(date);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dateStr;
     }
 }

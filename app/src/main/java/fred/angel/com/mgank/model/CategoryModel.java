@@ -41,7 +41,7 @@ public class CategoryModel implements ICategoryModel {
             public int compare(Category lhs, Category rhs) {
                 int l = lhs.isChecked() ? 1:0;
                 int r = rhs.isChecked() ? 1:0;
-                return l-r;
+                return r-l;
             }
         });
         Utils.ObjectOutputStream(categories, FileUtils.getFileCachePath(Constant.FILE_NAME_CATEGORY));
@@ -51,6 +51,17 @@ public class CategoryModel implements ICategoryModel {
     public List<Category> getSelectCategories() {
 
         List<Category> allCategories = getAll();
+        List<Category> selectCategories = new ArrayList<>();
+        for(Category category : allCategories){
+            if(category.isChecked()){
+                selectCategories.add(category);
+            }
+        }
+        return selectCategories;
+    }
+
+
+    public static List<Category> getSelectCategories(List<Category> allCategories) {
         List<Category> selectCategories = new ArrayList<>();
         for(Category category : allCategories){
             if(category.isChecked()){

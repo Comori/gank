@@ -42,9 +42,20 @@ public class Constant {
     public interface LocalCacheKey{
 
         String SP_KEYBOARD_HEIGHT = "sp_keyboard_height";
+        String SP_YEAR = "sp_year";
+        String SP_MONTH = "sp_month";
+        String SP_DAY = "sp_day";
+        String SP_INIT_DATE = "SP_INIT_DATE";
     }
 
     public interface IntentKey{
         String CATEGORY = "category";
+        String CATEGORIES = "categories";
+    }
+
+    public interface RequestCode {
+        int BASE = 0x101;
+
+        int MANAGER_CATEGORY = BASE + 1;
     }
 }

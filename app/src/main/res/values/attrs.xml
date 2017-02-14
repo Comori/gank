@@ -20,4 +20,9 @@
         <attr name="toolbarBackground" format="reference|color"/>
     </declare-styleable>
 
+    <declare-styleable name="AspectRatioImageView">
+        <attr name="touchable" format="boolean" />
+        <attr name="viewAspectRatio" format="float" />
+    </declare-styleable>
+
 </resources>

@@ -26,7 +26,7 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <style name="activityAnimation" parent="@android:style/Animation.Translucent">
+    <style name="activityAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenExitAnimation">@anim/slide_left_out</item>
         <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>
         <item name="android:activityOpenEnterAnimation">@anim/slide_right_in</item>

@@ -1,22 +1,22 @@
 package fred.angel.com.mgank.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import fred.angel.com.mgank.R;
-import fred.angel.com.mgank.component.FrescoImgView;
 import fred.angel.com.mgank.component.Utils.Constant;
 import fred.angel.com.mgank.component.Utils.DisplayUtil;
+import fred.angel.com.mgank.component.Utils.ImageLoader;
+import fred.angel.com.mgank.component.Utils.UIHelper;
 import fred.angel.com.mgank.component.Utils.Utils;
 import fred.angel.com.mgank.component.stickyrecyclerview.StickyRecyclerHeadersAdapter;
 import fred.angel.com.mgank.model.enity.DateGank;
 import fred.angel.com.mgank.model.enity.Gank;
-import fred.angel.com.mgank.view.WebActivity;
 
 /**
  * Created by chenqiang on 2016/11/4.
@@ -59,26 +59,27 @@ public class TodayGankAdapter extends RecyclerView.Adapter implements StickyRecy
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final Gank gank = dateGank.getItem(position);
         if(getItemViewType(position) == TYPE_WELFARE_PHOTO){
-            FrescoImgView img = (FrescoImgView) holder.itemView;
-            img.setImageAuto((gank.getUrl()==null)?"":gank.getUrl()
-                    .concat("?imageView2/0/w/"+ DisplayUtil.dip2px(70)));
+            ImageView img = (ImageView) holder.itemView;
+            ImageLoader.displayImage(context,img,(gank.getUrl()==null)?"":gank.getUrl());
         }else {
             GankHolder itemHolder = (GankHolder) holder;
+            int pResId = 0;
             if(TextUtils.equals(gank.getType(), Constant.Category.REST_VIDEO)){
-                itemHolder.img.getHierarchy().setPlaceholderImage(R.drawable.ic_video_70dp);
+                pResId = R.drawable.ic_video_70dp;
             }else {
-                itemHolder.img.getHierarchy().setPlaceholderImage(R.drawable.ic_description_70dp);
+                pResId = R.drawable.ic_description_70dp;
             }
-            itemHolder.img.setImageAuto((gank.getImages()==null || gank.getImages().isEmpty())?"":gank.getImages().get(0)
-                    .concat("?imageView2/0/w/"+ DisplayUtil.dip2px(70)));
+            ImageLoader.displayImage(context,itemHolder.img,(gank.getImages()==null || gank.getImages().isEmpty())?"":gank.getImages().get(0)
+                    .concat("?imageView2/0/w/"+ DisplayUtil.dip2px(140)),pResId);
             itemHolder.contentTv.setText(gank.getDesc());
             itemHolder.authorTv.setText(gank.getWho());
-            itemHolder.timeTv.setText(gank.getPublishedAt());
+            itemHolder.timeTv.setText(Utils.parseDate(gank.getPublishedAt()));
             itemHolder.tagImg.setImageResource(Utils.getTypeDrawableResId(gank.getType()));
             itemHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    context.startActivity(new Intent(context, WebActivity.class).putExtra("web_url",gank.getUrl()));
+//                    context.startActivity(new Intent(context, WebActivity.class).putExtra("web_url",gank.getUrl()));
+                    UIHelper.openWeb(context,gank.getUrl());
                 }
             });
 
@@ -119,6 +120,7 @@ public class TodayGankAdapter extends RecyclerView.Adapter implements StickyRecy
             case "福利":
                 sectionViewHolder.img.setImageResource(R.drawable.ic_widgets);
                 sectionViewHolder.tv_name.setTextColor(context.getResources().getColor(R.color.grey));
+                sectionViewHolder.tv_name.setText("每日一图");
                 break;
             case "拓展资源":
                 sectionViewHolder.img.setImageResource(R.drawable.ic_widgets);

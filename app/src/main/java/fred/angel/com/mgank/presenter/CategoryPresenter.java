@@ -29,6 +29,6 @@ public class CategoryPresenter {
     }
 
     public void saveCategories(List<Category> categories){
-        categoryModel.save(categoryView.getCategories());
+        categoryModel.save(categories);
     }
 }
