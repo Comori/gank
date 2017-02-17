@@ -5,4 +5,5 @@
     android:id="@+id/img"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    fresco:viewAspectRatio="1.5" />
+    fresco:viewAspectRatio="1.5"
+    />

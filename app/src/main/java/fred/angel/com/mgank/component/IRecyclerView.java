@@ -1,8 +1,10 @@
 package fred.angel.com.mgank.component;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 
 /**
@@ -62,27 +64,36 @@ public class IRecyclerView extends RecyclerView {
 	}
 
 	private void init() {
-		addOnScrollListener(new OnScrollListener() {
-
-			@Override
-			public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-				super.onScrollStateChanged(recyclerView, newState);
-			}
-
-			@Override
-			public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-				if(iRecyclerViewListener != null){
-					final LinearLayoutManager layoutManager = (LinearLayoutManager) getLayoutManager();
-					if (dy > 0 && layoutManager != null // dy>0表示向下滑动
-							&& layoutManager.findLastVisibleItemPosition() >= layoutManager.getItemCount() - 1) { // 剩下1个item自动加载
-						iRecyclerViewListener.loadMore();
-					}
-				}
-
-				super.onScrolled(recyclerView, dx, dy);
-			}
-
-		});
+//		addOnScrollListener(new OnScrollListener() {
+//
+//			@Override
+//			public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//				super.onScrollStateChanged(recyclerView, newState);
+//			}
+//
+//			@Override
+//			public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//				if(iRecyclerViewListener != null){
+//					if(getLayoutManager() instanceof LinearLayoutManager){
+//						final LinearLayoutManager layoutManager = (LinearLayoutManager) getLayoutManager();
+//						if (dy > 0 && layoutManager != null // dy>0表示向下滑动
+//								&& layoutManager.findLastVisibleItemPosition() >= layoutManager.getItemCount() - 1) { // 剩下1个item自动加载
+//							iRecyclerViewListener.loadMore();
+//						}
+//					}else {
+//						final StaggeredGridLayoutManager layoutManager = (StaggeredGridLayoutManager) getLayoutManager();
+//						int[] lastPosition = layoutManager.findFirstVisibleItemPositions(null);
+//						if (dy > 0 && layoutManager != null // dy>0表示向下滑动
+//								&& layoutManager.findLastVisibleItemPositions() >= layoutManager.getItemCount() - 1) { // 剩下1个item自动加载
+//							iRecyclerViewListener.loadMore();
+//						}
+//					}
+//				}
+//
+//				super.onScrolled(recyclerView, dx, dy);
+//			}
+//
+//		});
 	}
 
 	/**
@@ -95,17 +106,6 @@ public class IRecyclerView extends RecyclerView {
 		this.pauseOnSettling = pauseOnSettling;
 	}
 
-//	/**
-//	 * 设置顶部空隙
-//	 * @param topSpace
-//	 */
-//	public void setTopSpace(int topSpace) {
-//		this.topSpace = topSpace;
-//		Adapter adapter = getAdapter();
-//		if (adapter != null && adapter instanceof BaseRecyclerViewAdapter) {
-//			((BaseRecyclerViewAdapter) adapter).setTopSpace(topSpace);
-//		}
-//	}
 
 	@Override
 	public void setAdapter(Adapter adapter) {
@@ -118,13 +118,6 @@ public class IRecyclerView extends RecyclerView {
 			adapter.registerAdapterDataObserver(observer);
 		}
 
-//		if (adapter != null && adapter instanceof BaseRecyclerViewAdapter) {
-//			((BaseRecyclerViewAdapter) adapter).setTopSpace(topSpace);
-//		}
-//
-//		if (adapter instanceof BaseRecyclerViewAdapter) {
-//			this.adapter = (BaseRecyclerViewAdapter) adapter;
-//		}
 	}
 //
 	public void checkIfEmpty() {
@@ -136,17 +129,6 @@ public class IRecyclerView extends RecyclerView {
 //		}
 	}
 //
-//	public PageRecyclerLayout getRefreshLayout() {
-//		if (multiStateLayout != null && multiStateLayout instanceof PageRecyclerLayout) {
-//			return (PageRecyclerLayout) multiStateLayout;
-//		} else {
-//			return null;
-//		}
-//	}
-//
-//	void setMultiStateLayout(MultiStateLayout refreshLayout) {
-//		this.multiStateLayout = refreshLayout;
-//	}
 
 	public interface IRecyclerViewListener{
 
@@ -162,5 +144,82 @@ public class IRecyclerView extends RecyclerView {
 
 	public void setIRecyclerViewListener(IRecyclerViewListener iRecyclerViewListener) {
 		this.iRecyclerViewListener = iRecyclerViewListener;
+	}
+
+
+	public enum LAYOUT_MANAGER_TYPE {
+		LINEAR,
+		GRID,
+		STAGGERED_GRID
+	}
+
+	private LAYOUT_MANAGER_TYPE layoutManagerType;
+
+	/**
+	 * 最后一个的位置
+	 */
+	private int[] lastPositions;
+
+	/**
+	 * 最后一个可见的item的位置
+	 */
+	private int lastVisibleItemPosition;
+
+
+	@Override
+	public void onScrolled(int dx, int dy) {
+		super.onScrolled(dx, dy);
+
+
+		RecyclerView.LayoutManager layoutManager = getLayoutManager();
+		if (layoutManagerType == null) {
+			if (layoutManager instanceof LinearLayoutManager) {
+				layoutManagerType = LAYOUT_MANAGER_TYPE.LINEAR;
+			} else if (layoutManager instanceof StaggeredGridLayoutManager) {
+				layoutManagerType = LAYOUT_MANAGER_TYPE.STAGGERED_GRID;
+			} else {
+				throw new RuntimeException(
+						"Unsupported LayoutManager used. Valid ones are LinearLayoutManager, GridLayoutManager and StaggeredGridLayoutManager");
+			}
+		}
+
+		switch (layoutManagerType) {
+			case LINEAR:
+				lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+				break;
+			case GRID:
+				lastVisibleItemPosition = ((GridLayoutManager) layoutManager).findLastVisibleItemPosition();
+				break;
+			case STAGGERED_GRID:
+				StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
+				if (lastPositions == null) {
+					lastPositions = new int[staggeredGridLayoutManager.getSpanCount()];
+				}
+				staggeredGridLayoutManager.findLastVisibleItemPositions(lastPositions);
+				lastVisibleItemPosition = findMax(lastPositions);
+				break;
+		}
+	}
+
+
+	@Override
+	public void onScrollStateChanged(int state) {
+		super.onScrollStateChanged(state);
+		RecyclerView.LayoutManager layoutManager = getLayoutManager();
+		int visibleItemCount = layoutManager.getChildCount();
+		int totalItemCount = layoutManager.getItemCount();
+		if (visibleItemCount > 0 && state == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItemPosition == totalItemCount - 1 && iRecyclerViewListener != null) {
+			iRecyclerViewListener.loadMore();
+		}
+	}
+
+	private int findMax(int[] lastPositions) {
+		int max = lastPositions[0];
+		for (int value : lastPositions) {
+			if (value > max) {
+				max = value;
+			}
+		}
+		return max;
 	}
 }

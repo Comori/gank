@@ -1,7 +1,7 @@
 package fred.angel.com.mgank.adapter;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
 import android.view.ViewGroup;
 
 import java.util.List;
@@ -31,12 +31,20 @@ public class FragmentPagerAdapter extends android.support.v4.app.FragmentPagerAd
 	}
 
 	@Override
+	public long getItemId(int position) {
+		if(!TextUtils.isEmpty(getItem(position).getPageTitle())){
+			return super.getItemId(position)+getItem(position).getPageTitle().hashCode();
+		}
+		return super.getItemId(position);
+	}
+
+	@Override
 	public int getCount() {
 		return fragments.size();
 	}
 
 	@Override
-	public Fragment getItem(int arg0) {
+	public BaseFragment getItem(int arg0) {
 		return fragments.get(arg0);
 	}
 

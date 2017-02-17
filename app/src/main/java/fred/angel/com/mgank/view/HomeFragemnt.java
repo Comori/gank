@@ -84,31 +84,25 @@ public class HomeFragemnt extends BaseFragment implements IHomeView{
             for(Category category : categories){
                 Bundle bundle = new Bundle();
                 bundle.putString(Constant.IntentKey.CATEGORY,category.getName());
-                CategoryDataFragment fragment = new CategoryDataFragment();
-                fragment.setCategory(category.getName());
-                fragment.setArguments(bundle);
-                fragments.add(fragment);
+                if(TextUtils.equals("福利",category.getName())){
+                    WelfareFragment fragment = new WelfareFragment();
+                    fragment.setCategory(category.getName());
+                    fragment.setArguments(bundle);
+                    fragments.add(fragment);
+                }else {
+                    CategoryDataFragment fragment = new CategoryDataFragment();
+                    fragment.setCategory(category.getName());
+                    fragment.setArguments(bundle);
+                    fragments.add(fragment);
+                }
             }
         }
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-            @Override
-            public void onPageSelected(int position) {
-                selectCategoryName = navTablayout.getTabAt(position).getText().toString();
-            }
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
         FragmentPagerAdapter adapter = null;
         if(viewPager.getAdapter() != null){
-            viewPager.clearOnPageChangeListeners();
             adapter = (FragmentPagerAdapter) viewPager.getAdapter();
             adapter.setFragments(fragments);
         }else {
-            adapter = new FragmentPagerAdapter(fragManager,fragments,true);
+            adapter = new FragmentPagerAdapter(fragManager,fragments,false);
             viewPager.setAdapter(adapter);
         }
 
@@ -124,6 +118,19 @@ public class HomeFragemnt extends BaseFragment implements IHomeView{
             }
             if(n > 0) viewPager.setCurrentItem(n+1);
         }
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+            @Override
+            public void onPageSelected(int position) {
+                selectCategoryName = navTablayout.getTabAt(position).getText().toString();
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
 
     @Override

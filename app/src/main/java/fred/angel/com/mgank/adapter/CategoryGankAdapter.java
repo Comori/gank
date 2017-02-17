@@ -25,6 +25,8 @@ public class CategoryGankAdapter extends RecyclerView.Adapter<GankHolder> {
     private Context context;
     private List<Gank> ganks;
 
+    private int placeHolderImgResId = R.drawable.ic_description_70dp;
+
     public CategoryGankAdapter(Context context) {
         this(context,null);
     }
@@ -43,7 +45,7 @@ public class CategoryGankAdapter extends RecyclerView.Adapter<GankHolder> {
     public void onBindViewHolder(GankHolder holder, int position) {
         final Gank gank = ganks.get(position);
         ImageLoader.displayImage(context,holder.img,(gank.getImages()==null || gank.getImages().isEmpty())?"":gank.getImages().get(0)
-                .concat("?imageView2/0/w/"+ DisplayUtil.dip2px(140)),R.drawable.ic_description_70dp);
+                .concat("?imageView2/0/w/"+ DisplayUtil.dip2px(140)),placeHolderImgResId);
         holder.contentTv.setText(gank.getDesc());
         holder.authorTv.setText(gank.getWho());
         holder.timeTv.setText(Utils.parseDate(gank.getPublishedAt()));
@@ -70,5 +72,10 @@ public class CategoryGankAdapter extends RecyclerView.Adapter<GankHolder> {
         int positionStart = this.ganks.size();
         this.ganks.addAll(ganks);
         notifyItemRangeInserted(positionStart,ganks.size());
+    }
+
+    public CategoryGankAdapter setPlaceHolderImgResId(int placeHolderImgResId) {
+        this.placeHolderImgResId = placeHolderImgResId;
+        return this;
     }
 }

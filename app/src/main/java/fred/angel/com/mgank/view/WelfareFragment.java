@@ -1,10 +1,11 @@
 package fred.angel.com.mgank.view;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,11 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import fred.angel.com.mgank.R;
-import fred.angel.com.mgank.adapter.CategoryGankAdapter;
+import fred.angel.com.mgank.adapter.WelfareAdapter;
 import fred.angel.com.mgank.component.BaseFragment;
 import fred.angel.com.mgank.component.IRecyclerView;
 import fred.angel.com.mgank.component.Utils.Constant;
-import fred.angel.com.mgank.component.widget.DividerItemDecoration;
+import fred.angel.com.mgank.component.Utils.DisplayUtil;
 import fred.angel.com.mgank.model.enity.Gank;
 import fred.angel.com.mgank.presenter.CategoryGankPresenter;
 
@@ -25,14 +26,14 @@ import fred.angel.com.mgank.presenter.CategoryGankPresenter;
  * Todo
  */
 
-public class CategoryDataFragment extends BaseFragment implements ICategoryGankView{
+public class WelfareFragment extends BaseFragment implements ICategoryGankView{
 
     private String category;
 
     private SwipeRefreshLayout refreshLayout;
     private IRecyclerView recyclerView;
 
-    private CategoryGankAdapter gankAdapter;
+    private WelfareAdapter gankAdapter;
 
     private CategoryGankPresenter gankPresenter;
 
@@ -58,14 +59,21 @@ public class CategoryDataFragment extends BaseFragment implements ICategoryGankV
         super.onViewCreated(view, savedInstanceState);
         refreshLayout = findView(R.id.swipeRefreshLayout);
         recyclerView = findView(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
 
-        gankAdapter = new CategoryGankAdapter(context);
-        if(TextUtils.equals("休息视频",category)){
-            gankAdapter.setPlaceHolderImgResId(R.drawable.ic_video_70dp);
-        }
+        gankAdapter = new WelfareAdapter(context);
         recyclerView.setAdapter(gankAdapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(context));
+        final int dp_2 = DisplayUtil.dip2px(2);
+        final int dp_1 = DisplayUtil.dip2px(1);
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                outRect.right = dp_1;
+                outRect.left = dp_1;
+                outRect.bottom = dp_2;
+            }
+        });
 
         recyclerView.setIRecyclerViewListener(new IRecyclerView.IRecyclerViewListener() {
             @Override
@@ -87,7 +95,7 @@ public class CategoryDataFragment extends BaseFragment implements ICategoryGankV
         });
     }
 
-    public CategoryDataFragment setCategory(String category) {
+    public WelfareFragment setCategory(String category) {
         this.category = category;
         return this;
     }
