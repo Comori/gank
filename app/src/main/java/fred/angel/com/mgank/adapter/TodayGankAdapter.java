@@ -6,7 +6,11 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.target.ImageViewTarget;
 
 import fred.angel.com.mgank.R;
 import fred.angel.com.mgank.component.Utils.Constant;
@@ -15,11 +19,12 @@ import fred.angel.com.mgank.component.Utils.ImageLoader;
 import fred.angel.com.mgank.component.Utils.UIHelper;
 import fred.angel.com.mgank.component.Utils.Utils;
 import fred.angel.com.mgank.component.stickyrecyclerview.StickyRecyclerHeadersAdapter;
+import fred.angel.com.mgank.component.widget.AspectRatioImageView;
 import fred.angel.com.mgank.model.enity.DateGank;
 import fred.angel.com.mgank.model.enity.Gank;
 
 /**
- * Created by chenqiang on 2016/11/4.
+ * Created by Comori on 2016/11/4.
  * Todo
  */
 
@@ -59,8 +64,19 @@ public class TodayGankAdapter extends RecyclerView.Adapter implements StickyRecy
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final Gank gank = dateGank.getItem(position);
         if(getItemViewType(position) == TYPE_WELFARE_PHOTO){
-            ImageView img = (ImageView) holder.itemView;
-            ImageLoader.displayImage(context,img,(gank.getUrl()==null)?"":gank.getUrl());
+            final AspectRatioImageView img = (AspectRatioImageView) holder.itemView;
+//            ImageLoader.displayImage(context,img,(gank.getUrl()==null)?"":gank.getUrl());
+            Glide.with(context).load((gank.getUrl()==null)?"":gank.getUrl())
+                    .thumbnail(0.5f)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(new ImageViewTarget<GlideDrawable>(img){
+                        @Override
+                        protected void setResource(GlideDrawable resource) {
+                            float scale = resource.getIntrinsicWidth() * 1.0f / resource.getIntrinsicHeight();
+                            img.setAspectRatio(scale);
+                            img.setImageDrawable(resource);
+                        }
+                    });
         }else {
             GankHolder itemHolder = (GankHolder) holder;
             int pResId = 0;

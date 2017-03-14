@@ -4,7 +4,7 @@ package fred.angel.com.mgank.component.cache;
 import java.io.Serializable;
 
 /**
- * Created by chenqiang
+ * Created by Comori
  * Todo 数据库管理器
  */
 public class DBManager<T extends Serializable> implements IDataManager<T> {

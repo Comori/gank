@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 /**
  * 自定义通用列表<br/>
  * 管理列表滚动<br/>
- * @author chenqiang
+ * @author Comori
  */
 public class IRecyclerView extends RecyclerView {
 

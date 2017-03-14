@@ -21,7 +21,7 @@ import android.support.v7.widget.helper.MyItemTouchHelper;
 /**
  * Created in 2016/5/7 21:35.
  *
- * @author chenqiang;
+ * @author Comori;
  */
 public class DefaultItemTouchHelper extends MyItemTouchHelper {
 

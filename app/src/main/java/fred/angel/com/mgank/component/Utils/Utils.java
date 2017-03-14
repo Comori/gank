@@ -21,7 +21,7 @@ import fred.angel.com.mgank.IApplication;
 import fred.angel.com.mgank.R;
 
 /**
- * Created by chenqiang on 2016/11/1.
+ * Created by Comori on 2016/11/1.
  * Todo
  */
 
@@ -186,6 +186,22 @@ public class Utils {
                 SimpleDateFormat ymdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 return ymdFormat.format(date);
             }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dateStr;
+    }
+
+    /**
+     *
+     * @param dateStr
+     * @return
+     */
+    public static String formateDate(String dateStr){
+        SimpleDateFormat mdFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = mdFormat.parse(dateStr);
+            return new SimpleDateFormat("yyyy/MM/dd").format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }

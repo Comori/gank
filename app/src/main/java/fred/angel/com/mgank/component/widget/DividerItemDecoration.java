@@ -17,7 +17,7 @@ import fred.angel.com.mgank.component.Utils.DisplayUtil;
 /**
  * list的recyclerview的分割线，支持横向和竖向的
  * 
- * @author chenqiang
+ * @author Comori
  *
  */
 public class DividerItemDecoration extends ItemDecoration {

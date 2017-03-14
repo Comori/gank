@@ -19,7 +19,7 @@ import fred.angel.com.mgank.component.Utils.DisplayUtil;
 import fred.angel.com.mgank.component.Utils.Utils;
 
 /**
- * Created by chenqiang
+ * Created by Comori
  * Todo 自定义顶部top toolbar
  */
 public class IToolbar extends FrameLayout {

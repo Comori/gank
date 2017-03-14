@@ -7,16 +7,32 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by chenqiang on 2016/11/4.
+ * Created by Comori on 2016/11/4.
  * Todo
  */
 
 public class DateGankModel implements IDateGankModel {
 
     @Override
-    public void loadDateGank(String year, String month, String day,
-                             final OnLoadDateGankListener loadDateGankListener) {
-        ApiClient.getApi().getDateData(year, month, day)
+    public void loadHistoryDate(final INetCallback<String> listener) {
+        ApiClient.getApi().getHistoryDate()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new NetSubscriber<String>(){
+                    @Override
+                    public void onNext(String s) {
+                        super.onNext(s);
+                        if(listener != null){
+                            listener.onSuccess(0,s);
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void loadDateGank(String date,
+                             final INetCallback<DateGank> loadDateGankListener) {
+        ApiClient.getApi().getDateData(date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscriber<DateGank>(){
@@ -24,18 +40,19 @@ public class DateGankModel implements IDateGankModel {
                     public void onNext(DateGank dateGank) {
                         super.onNext(dateGank);
                         if(loadDateGankListener != null){
-                            loadDateGankListener.onSuccess(dateGank);
+                            loadDateGankListener.onSuccess(0,dateGank);
                         }
                     }
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
                         if(loadDateGankListener != null){
-                            loadDateGankListener.onFailure(e.getMessage());
+                            loadDateGankListener.onFailure(0,e.getMessage());
                         }
                     }
                 });
     }
+
 
 
 }

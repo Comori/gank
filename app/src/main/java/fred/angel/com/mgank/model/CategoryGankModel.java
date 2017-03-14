@@ -9,14 +9,14 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by chenqiang on 2016/11/8.
+ * Created by Comori on 2016/11/8.
  * Todo
  */
 
 public class CategoryGankModel implements ICategoryGankModel{
 
     @Override
-    public void loadCategoryGank(String category, final int pageNum, final OnLoadCategoryCankListener listener) {
+    public void loadCategoryGank(String category, final int pageNum, final INetCallback<List<Gank>> listener) {
         ApiClient.getApi().getCategoryData(category,pageNum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -25,7 +25,7 @@ public class CategoryGankModel implements ICategoryGankModel{
                     public void onNext(List<Gank> ganks) {
                         super.onNext(ganks);
                         if(listener != null){
-                            listener.onSucess(pageNum,ganks);
+                            listener.onSuccess(pageNum,ganks);
                         }
                     }
                     @Override

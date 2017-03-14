@@ -25,7 +25,7 @@ import fred.angel.com.mgank.model.enity.DateGank;
 import fred.angel.com.mgank.presenter.TodayGankPresenter;
 
 /**
- * Created by chenqiang on 2016/11/4.
+ * Created by Comori on 2016/11/4.
  * Todo 今日数据fragment
  */
 
@@ -40,6 +40,7 @@ public class TodayFragment extends BaseFragment implements ITodayGankView{
     private boolean first = true;
 
     final Calendar calendar = Calendar.getInstance();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,15 +92,11 @@ public class TodayFragment extends BaseFragment implements ITodayGankView{
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                todayGankPresenter.loadTodayGank(calendar.get(Calendar.YEAR)+"",
-                        (calendar.get(Calendar.MONTH)+1)+"",
-                        calendar.get(Calendar.DAY_OF_MONTH)+"");
+                todayGankPresenter.loadTodayGank();
             }
         });
 
-        todayGankPresenter.loadTodayGank(calendar.get(Calendar.YEAR)+"",
-                (calendar.get(Calendar.MONTH)+1)+"",
-                calendar.get(Calendar.DAY_OF_MONTH)+"");
+        todayGankPresenter.loadTodayGank();
     }
 
     @Override
@@ -139,19 +136,19 @@ public class TodayFragment extends BaseFragment implements ITodayGankView{
         }else {
             calendar.add(Calendar.DAY_OF_MONTH,-1);
         }
-
-        todayGankPresenter.loadTodayGank(calendar.get(Calendar.YEAR)+"",
-                (calendar.get(Calendar.MONTH)+1)+"",
-                calendar.get(Calendar.DAY_OF_MONTH)+"");
+//
+//        todayGankPresenter.loadTodayGank(calendar.get(Calendar.YEAR)+"",
+//                (calendar.get(Calendar.MONTH)+1)+"",
+//                calendar.get(Calendar.DAY_OF_MONTH)+"");
     }
 
     @Override
     public void showProgressView() {
-        refreshLayout.setRefreshing(true);
     }
 
     @Override
     public void hideProgressView() {
+        hideProgress();
         refreshLayout.setRefreshing(false);
     }
 }

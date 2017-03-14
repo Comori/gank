@@ -29,7 +29,7 @@ import retrofit2.Converter;
 import retrofit2.Retrofit;
 
 /**
- * Created by chenqiang on 2016/11/1.
+ * Created by Comori on 2016/11/1.
  * Todo 自定义解析，主要只解析result内容
  */
 
@@ -132,21 +132,25 @@ public class CustomGsonConvertFactory extends Converter.Factory  {
                     JsonReader jsonReader = mGson.newJsonReader(reader);
                     try {
                         return adapter.read(jsonReader);
-                    } finally {
+                    } catch (Exception e){
+                       return (T) result;
+                    }  finally{
                         value.close();
                     }
                 }
+            }else {
+                MediaType mediaType = value.contentType();
+                Charset charset = mediaType != null ? mediaType.charset(UTF_8) : UTF_8;
+                ByteArrayInputStream bis = new ByteArrayInputStream(response.getBytes());
+                InputStreamReader reader = new InputStreamReader(bis,charset);
+                JsonReader jsonReader = mGson.newJsonReader(reader);
+                try {
+                    return adapter.read(jsonReader);
+                } finally {
+                    value.close();
+                }
             }
-            MediaType mediaType = value.contentType();
-            Charset charset = mediaType != null ? mediaType.charset(UTF_8) : UTF_8;
-            ByteArrayInputStream bis = new ByteArrayInputStream(response.getBytes());
-            InputStreamReader reader = new InputStreamReader(bis,charset);
-            JsonReader jsonReader = mGson.newJsonReader(reader);
-            try {
-                return adapter.read(jsonReader);
-            } finally {
-                value.close();
-            }
+            return null;
         }
     }
 }

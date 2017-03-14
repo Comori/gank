@@ -1,12 +1,11 @@
 package fred.angel.com.mgank;
 
+import android.app.ActivityManager;
 import android.app.Application;
-
-import com.bumptech.glide.load.engine.cache.DiskCache;
-import com.tencent.smtt.sdk.QbSdk;
+import android.content.Context;
 
 /**
- * Created by chenqiang on 2016/11/1.
+ * Created by Comori on 2016/11/1.
  * Todo
  */
 
@@ -17,11 +16,26 @@ public class IApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        INSTACE = this;
-//        Fresco.initialize(this, FrescoConfig.getImagePipelineConfig(this));
-        QbSdk.initX5Environment(this,null);
-        DiskCache
+        if(isMineApp(this)){
+            INSTACE = this;
+        }
     }
 
+    /**
+     * 是否是本应用程序进程
+     *
+     * @param context
+     * @return
+     */
+    public boolean isMineApp(Context context) {
+        int pid = android.os.Process.myPid();
+        ActivityManager activityManager = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE));
+        for (ActivityManager.RunningAppProcessInfo appProcess : activityManager.getRunningAppProcesses()) {
+            if (appProcess.pid == pid && appProcess.processName.equalsIgnoreCase(context.getPackageName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

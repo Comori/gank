@@ -1,7 +1,7 @@
 package fred.angel.com.mgank.component.Utils;
 
 /**
- * Created by chenqiang on 2016/9/29.
+ * Created by Comori on 2016/9/29.
  * Todo
  */
 
@@ -51,6 +51,8 @@ public class Constant {
     public interface IntentKey{
         String CATEGORY = "category";
         String CATEGORIES = "categories";
+        String GANKS = "ganks";
+        String CURRENT_POSITION = "CURRENT_POSITION";
     }
 
     public interface RequestCode {

@@ -23,7 +23,7 @@ import fred.angel.com.mgank.model.enity.Category;
 import fred.angel.com.mgank.presenter.HomePresenter;
 
 /**
- * Created by chenqiang on 2016/11/7.
+ * Created by Comori on 2016/11/7.
  * Todo 首页
  */
 

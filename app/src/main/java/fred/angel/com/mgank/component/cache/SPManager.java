@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 import fred.angel.com.mgank.IApplication;
 
 /**
- * Created by chenqiang on 2016/3/1.
+ * Created by Comori on 2016/3/1.
  * Todo SharedPreferences管理器
  */
 public class SPManager<T> implements IDataManager<T> {

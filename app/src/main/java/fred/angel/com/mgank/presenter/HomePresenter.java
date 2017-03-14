@@ -5,7 +5,7 @@ import fred.angel.com.mgank.model.ICategoryModel;
 import fred.angel.com.mgank.view.IHomeView;
 
 /**
- * Created by chenqiang on 2016/11/8.
+ * Created by Comori on 2016/11/8.
  * Todo
  */
 

@@ -1,7 +1,7 @@
 package fred.angel.com.mgank.component.cache;
 
 /**
- * Created by chenqiang on 2016/3/1.
+ * Created by Comori on 2016/3/1.
  * Todo 本地数据管理接口
  */
 public interface IDataManager<T> {

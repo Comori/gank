@@ -10,7 +10,7 @@ import fred.angel.com.mgank.R;
 import fred.angel.com.mgank.component.Utils.Utils;
 
 /**
- * Created by chenqiang on 2016/11/8.
+ * Created by Comori on 2016/11/8.
  * Todo
  */
 public class GankHolder extends RecyclerView.ViewHolder{

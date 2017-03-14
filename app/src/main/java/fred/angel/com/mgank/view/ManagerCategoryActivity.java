@@ -28,7 +28,7 @@ import fred.angel.com.mgank.model.enity.Category;
 import fred.angel.com.mgank.presenter.CategoryPresenter;
 
 /**
- * Created by chenqiang on 2016/11/3.
+ * Created by Comori on 2016/11/3.
  * Todo 管理分类
  */
 

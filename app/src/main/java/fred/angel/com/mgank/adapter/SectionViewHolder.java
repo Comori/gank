@@ -12,7 +12,7 @@ import fred.angel.com.mgank.R;
 
 
 /**
- * Created by chenqiang
+ * Created by Comori
  * Todo
  */
 public class SectionViewHolder extends RecyclerView.ViewHolder{

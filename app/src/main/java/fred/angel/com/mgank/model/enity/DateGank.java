@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by chenqiang on 2016/11/3.
+ * Created by Comori on 2016/11/3.
  * Todo 今日数据
  */
 

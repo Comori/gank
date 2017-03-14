@@ -1,11 +1,16 @@
 package fred.angel.com.mgank.component.Utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 
 import com.thefinestartist.finestwebview.FinestWebView;
 
+import java.util.ArrayList;
+
 import fred.angel.com.mgank.R;
+import fred.angel.com.mgank.model.enity.Gank;
+import fred.angel.com.mgank.view.PhotoGalleryActivity;
 
 public class UIHelper {
 
@@ -33,6 +38,14 @@ public class UIHelper {
                 .setCustomAnimations(R.anim.slide_right_in, R.anim.hold, R.anim.hold,
                         R.anim.slide_right_out)
                 .show(url);
+    }
+
+    public static void goPhotoGallery(Context context, int currentPosition, ArrayList<Gank> ganks){
+        Intent intent = new Intent(context, PhotoGalleryActivity.class);
+        intent.putParcelableArrayListExtra(Constant.IntentKey.GANKS, ganks);
+        intent.putExtra(Constant.IntentKey.CURRENT_POSITION,currentPosition);
+        context.startActivity(intent);
+//        context.overridePendingTransition(R.anim.act_alpha_exit,R.anim.act_alpha_enter);
     }
 
 }

@@ -16,7 +16,7 @@ import fred.angel.com.mgank.component.Utils.Utils;
 import fred.angel.com.mgank.model.enity.Gank;
 
 /**
- * Created by chenqiang on 2016/11/8.
+ * Created by Comori on 2016/11/8.
  * Todo
  */
 

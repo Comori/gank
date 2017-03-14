@@ -8,7 +8,7 @@ import fred.angel.com.mgank.component.Utils.FileUtils;
 import fred.angel.com.mgank.component.Utils.Utils;
 
 /**
- * Created by chenqiang
+ * Created by Comori
  * Todo 缓存文件管理器，文件目录在/sdcard/Android/data/包名/cache/mGank/目录下
  */
 public class CacheFileManager<T> implements IDataManager<T> {

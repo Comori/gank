@@ -15,7 +15,7 @@ import fred.angel.com.mgank.component.cache.LocalDataFactory;
 /**
  * 屏幕大小、距离单位转换工具类
  *
- * @author chenqiang
+ * @author Comori
  *
  */
 public class DisplayUtil {

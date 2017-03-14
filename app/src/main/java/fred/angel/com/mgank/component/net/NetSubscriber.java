@@ -11,7 +11,7 @@ import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 
 /**
- * Created by chenqiang on 2016/11/1.
+ * Created by Comori on 2016/11/1.
  * Todo 对网络请求做统一处理
  */
 

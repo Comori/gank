@@ -13,7 +13,7 @@ import fred.angel.com.mgank.component.BaseFragment;
  * viewpager+fragment的共用adapter <br>
  * 默认不会自动销毁过期的页面
  * 
- * @author chenqiang
+ * @author Comori
  * 
  */
 public class FragmentPagerAdapter extends android.support.v4.app.FragmentPagerAdapter {

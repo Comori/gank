@@ -9,11 +9,18 @@ import retrofit2.http.Path;
 import rx.Observable;
 
 /**
- * Created by chenqiang on 2016/9/29.
+ * Created by Comori on 2016/9/29.
  * Todo
  */
 
 public interface Api {
+
+    /**
+     * 获取历史日期
+     * @return
+     */
+    @GET("api/day/history")
+    Observable<String> getHistoryDate();
 
     /**
      * 获取分类数据
@@ -34,13 +41,11 @@ public interface Api {
 
     /**
      * 每日数据： http://gank.io/api/day/年/月/日
-     * @param year
-     * @param month
-     * @param day
+     * @param date 必须是yy/MM/dd格式的
      * @return
      */
-    @GET("api/day/{year}/{month}/{day}")
-    Observable<DateGank> getDateData(@Path("year") String year, @Path("month") String month, @Path("day") String day);
+    @GET("api/day/{date}")
+    Observable<DateGank> getDateData(@Path("date") String date);
 
     /**
      * 获取发过干货日期接口:

@@ -35,6 +35,8 @@
 
         <activity android:name=".view.MainActivity"/>
         <activity android:name=".view.ManagerCategoryActivity"/>
+        <activity android:name=".view.PhotoGalleryActivity"
+            />
 
         <activity
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"

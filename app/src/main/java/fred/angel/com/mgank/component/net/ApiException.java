@@ -1,7 +1,7 @@
 package fred.angel.com.mgank.component.net;
 
 /**
- * Created by chenqiang on 2016/11/1.
+ * Created by Comori on 2016/11/1.
  * Todo
  */
 

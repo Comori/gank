@@ -12,7 +12,7 @@
 ///**
 // * Fresco 照片配置
 // *
-// * @author chenqiang
+// * @author Comori
 // */
 //public class FrescoConfig {
 //    private static final int MAX_HEAP_SIZE = (int) Runtime.getRuntime().maxMemory();//分配的可用内存

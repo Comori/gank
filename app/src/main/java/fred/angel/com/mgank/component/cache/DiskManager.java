@@ -8,7 +8,7 @@ import fred.angel.com.mgank.component.Utils.FileUtils;
 import fred.angel.com.mgank.component.Utils.Utils;
 
 /**
- * Created by chenqiang on 2016/3/1.
+ * Created by Comori on 2016/3/1.
  * Todo
  */
 public class DiskManager<T> implements IDataManager<T> {

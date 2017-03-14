@@ -9,7 +9,7 @@ import fred.angel.com.mgank.R;
 
 
 /**
- * Created by chenqiang on 2016/12/27.
+ * Created by Comori on 2016/12/27.
  */
 
 public class AspectRatioImageView extends ImageView {

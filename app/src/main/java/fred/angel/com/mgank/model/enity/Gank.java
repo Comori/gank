@@ -1,15 +1,16 @@
 package fred.angel.com.mgank.model.enity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-import fred.angel.com.mgank.model.enity.BaseModel;
-
 /**
- * Created by chenqiang on 2016/9/27.
+ * Created by Comori on 2016/9/27.
  * Todo
  */
 
-public class Gank extends BaseModel {
+public class Gank implements Parcelable {
 //    {
 //        _id: "57e8b595421aa95dd351b080",
 //                createdAt: "2016-09-26T13:43:49.970Z",
@@ -112,4 +113,51 @@ public class Gank extends BaseModel {
     public void setImages(List<String> images) {
         this.images = images;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this._id);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.publishedAt);
+        dest.writeString(this.desc);
+        dest.writeString(this.source);
+        dest.writeString(this.type);
+        dest.writeString(this.url);
+        dest.writeByte(this.used ? (byte) 1 : (byte) 0);
+        dest.writeString(this.who);
+        dest.writeStringList(this.images);
+    }
+
+    public Gank() {
+    }
+
+    protected Gank(Parcel in) {
+        this._id = in.readString();
+        this.createdAt = in.readString();
+        this.publishedAt = in.readString();
+        this.desc = in.readString();
+        this.source = in.readString();
+        this.type = in.readString();
+        this.url = in.readString();
+        this.used = in.readByte() != 0;
+        this.who = in.readString();
+        this.images = in.createStringArrayList();
+    }
+
+    public static final Parcelable.Creator<Gank> CREATOR = new Parcelable.Creator<Gank>() {
+        @Override
+        public Gank createFromParcel(Parcel source) {
+            return new Gank(source);
+        }
+
+        @Override
+        public Gank[] newArray(int size) {
+            return new Gank[size];
+        }
+    };
 }

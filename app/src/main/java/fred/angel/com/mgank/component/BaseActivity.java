@@ -14,7 +14,7 @@ import android.view.WindowManager;
 import fred.angel.com.mgank.BuildConfig;
 
 /**
- * Created by chenqiang on 2016/9/29.
+ * Created by Comori on 2016/9/29.
  * Todo
  */
 

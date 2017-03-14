@@ -9,7 +9,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 
 /**
- * Created by chenqiang on 2016/9/27.
+ * Created by Comori on 2016/9/27.
  * Todo 请求客户端
  */
 

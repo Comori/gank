@@ -18,6 +18,7 @@ import java.util.List;
 
 import fred.angel.com.mgank.R;
 import fred.angel.com.mgank.component.Utils.DisplayUtil;
+import fred.angel.com.mgank.component.Utils.UIHelper;
 import fred.angel.com.mgank.component.Utils.Utils;
 import fred.angel.com.mgank.model.enity.Gank;
 import fred.angel.com.mgank.model.enity.SizeModel;
@@ -53,7 +54,7 @@ public class WelfareAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         final Gank gank = ganks.get(position);
         PicHolder picHolder = (PicHolder) holder;
@@ -78,7 +79,7 @@ public class WelfareAdapter extends RecyclerView.Adapter {
         picHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(gank.getUrl());
+                UIHelper.goPhotoGallery(context,position, (ArrayList<Gank>) ganks);
             }
         });
     }

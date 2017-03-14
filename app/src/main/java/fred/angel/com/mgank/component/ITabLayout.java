@@ -14,7 +14,7 @@ import fred.angel.com.mgank.R;
 
 /**
  *
- * @author chenqiang
+ * @author Comori
  */
 public class ITabLayout extends TabLayout {
 
