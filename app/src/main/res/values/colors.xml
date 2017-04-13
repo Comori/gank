@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <!--<color name="colorPrimary">#FFFFFF</color>-->
+    <!--<color name="colorPrimaryDark">#FFFFFF</color>-->
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="bluePrimaryLight">#BADFFF</color>
+
+    <color name="page_color">#f4f4f4</color>
+    <color name="white">#FFFFFF</color>
+    <color name="color_d">#BDBDBD</color>
+
+    <color name="line_color">#e5e5e5</color>
+
+    <color name="grey">#9E9E9E</color>
+
+    <color name="translateDark">#33666666</color>
+    <color name="translate">#00000000</color>
+
+    <color name="text_black">#424242</color>
+
+    <color name="colorWhitePress">#f1f1f1</color>
+    <color name="android_green">#8BC34A</color>
+
+</resources>

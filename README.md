@@ -1,2 +1,1 @@
-# gank
-Technology gank
+first

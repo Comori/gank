@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">干货</string>
+
+
+
+    <string name="update_info">
+        <![CDATA[
+        <div><font color="#FF4081"><b>有新版本了!</b></font></div>
+        <b>更新提示：</b><br />
+         &nbsp;&nbsp;【%1$s】
+        ]]>
+    </string>
+
+    <string-array name="category_names">
+        <item>All</item>
+        <item>Android</item>
+        <item>IOS</item>
+        <item>前端</item>
+        <item>瞎推荐</item>
+        <item>App</item>
+        <item>拓展资源</item>
+        <item>休息视频</item>
+    </string-array>
+
+</resources>
